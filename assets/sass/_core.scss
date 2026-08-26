@@ -128,7 +128,7 @@ div.buttons {
 	}
 	&:hover, &:focus {
 		outline: none;
-		background-color: $color_primary;
+		background-color: $color_green;
 		color: #FFF;
 	}
 }
@@ -337,7 +337,7 @@ p:has(.button-element.button) {
 		font-family: $font_primary;
 		font-style: italic;
 		font-size: clamp(16px, 1.5vw, 22px);
-		font-weight: 400;
+		font-weight: 300;
 		line-height: 1.55;
 		letter-spacing: 0;
 		color: #FFF;
@@ -363,7 +363,7 @@ p:has(.button-element.button) {
 		padding: 16px 28px 14px;
 		&:hover,
 		&:focus {
-			background-color: #16475C;
+			background-color: $color_green;
 			color: #FFF;
 		}
 	}
@@ -385,6 +385,7 @@ p:has(.button-element.button) {
 	width: 44px;
 	height: 44px;
 	flex-shrink: 0;
+	align-self: center;
 	margin-left: auto;
 	background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
 	background-repeat: no-repeat;

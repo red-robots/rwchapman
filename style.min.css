@@ -1256,7 +1256,7 @@ div.buttons.align-right{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:f
 div.buttons.align-center{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .button{-webkit-appearance:none;-moz-appearance:none;appearance:none;display:inline-block;text-decoration:none;appearance:none;border:0;padding:16px 28px 14px;border-radius:0;min-width:120px;text-align:center;background-color:#0d3647;color:#fff;font-family:"Fahkwang",sans-serif;font-size:13px;font-weight:500;line-height:1.2;text-transform:uppercase;letter-spacing:.08em;overflow:hidden;color:#fff;position:relative;-webkit-transition:all ease .3s;transition:all ease .3s;z-index:2}
 .button.btn-wide{padding:12px 15px;min-width:250px}
-.button:hover,.button:focus{outline:0;background-color:#0d3647;color:#fff}
+.button:hover,.button:focus{outline:0;background-color:#52884e;color:#fff}
 p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:flex;gap:1rem}
 .wrapper{width:100%;max-width:1300px;margin:0 auto;padding-left:clamp(20px,4vw,64px);padding-right:clamp(20px,4vw,64px)}
 .site-header{position:absolute;top:0;left:0;width:100%;z-index:200;color:#fff;border-bottom:2px solid #fff}
@@ -1283,12 +1283,12 @@ p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:fl
 .hero-text-inner{width:100%;max-width:1520px;margin:0 auto;padding-left:clamp(20px,4vw,64px);padding-right:clamp(20px,4vw,64px)}
 .hero-text-inner h1,.hero-text-inner h2,.hero-text-inner h3{font-family:"Fahkwang",sans-serif;font-weight:400;font-size:clamp(28px,3.8vw,52px);line-height:1.18;letter-spacing:.02em;text-transform:uppercase;color:#fff;margin:0 0 1.35rem;max-width:18em}
 .hero-text-inner h1 strong,.hero-text-inner h2 strong,.hero-text-inner h3 strong{font-weight:700}
-.hero-text-inner p{font-family:"Noto Serif",serif;font-style:italic;font-size:clamp(16px,1.5vw,22px);font-weight:400;line-height:1.55;letter-spacing:0;color:#fff;margin:0 0 1rem;max-width:34em}
+.hero-text-inner p{font-family:"Noto Serif",serif;font-style:italic;font-size:clamp(16px,1.5vw,22px);font-weight:300;line-height:1.55;letter-spacing:0;color:#fff;margin:0 0 1rem;max-width:34em}
 .hero-text-inner p:has(.button),.hero-text-inner p:has(.button-element){font-style:normal;font-family:"Fahkwang",sans-serif;margin:1.75rem 0 0;max-width:none}
 .hero-text-inner .button,.hero-text-inner .button-element{font-family:"Fahkwang",sans-serif;font-style:normal;font-size:13px;font-weight:500;letter-spacing:.1em;background-color:#0d3647;color:#fff;padding:16px 28px 14px}
-.hero-text-inner .button:hover,.hero-text-inner .button:focus,.hero-text-inner .button-element:hover,.hero-text-inner .button-element:focus{background-color:#16475c;color:#fff}
+.hero-text-inner .button:hover,.hero-text-inner .button:focus,.hero-text-inner .button-element:hover,.hero-text-inner .button-element:focus{background-color:#52884e;color:#fff}
 .menu-toggle,.closeMenuToggle{display:none;-webkit-appearance:none;-moz-appearance:none;appearance:none;background:transparent;border:0;padding:0;cursor:pointer}
-.menu-toggle{position:relative;z-index:30;width:44px;height:44px;-ms-flex-negative:0;flex-shrink:0;margin-left:auto;background-image:-webkit-gradient(linear,left top,left bottom,from(#fff),to(#fff)),-webkit-gradient(linear,left top,left bottom,from(#fff),to(#fff)),-webkit-gradient(linear,left top,left bottom,from(#fff),to(#fff));background-image:linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient(#fff,#fff);background-repeat:no-repeat;background-size:22px 2px;background-position:center 14px,center 21px,center 28px}
+.menu-toggle{position:relative;z-index:30;width:44px;height:44px;-ms-flex-negative:0;flex-shrink:0;-ms-flex-item-align:center;align-self:center;margin-left:auto;background-image:-webkit-gradient(linear,left top,left bottom,from(#fff),to(#fff)),-webkit-gradient(linear,left top,left bottom,from(#fff),to(#fff)),-webkit-gradient(linear,left top,left bottom,from(#fff),to(#fff));background-image:linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient(#fff,#fff);background-repeat:no-repeat;background-size:22px 2px;background-position:center 14px,center 21px,center 28px}
 .menu-toggle span.bar{display:none}
 .closeMenuToggle{position:absolute;top:22px;right:22px;width:40px;height:40px;z-index:2}
 .closeMenuToggle::before,.closeMenuToggle::after{content:"";position:absolute;top:50%;left:50%;width:22px;height:2px;background:#fff}
