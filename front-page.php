@@ -4,7 +4,7 @@
  *
  */
 get_header(); 
-$repeatable_blocks = get_field('flexible_content');
+$repeatable_blocks = get_field('home_flexible_content');
 ?>
 
 <div id="primary" class="content-area-full generic-layout">

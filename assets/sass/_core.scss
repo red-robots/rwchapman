@@ -322,7 +322,7 @@ p:has(.button-element.button) {
 	h1, h2, h3 {
 		font-family: $font_secondary;
 		font-weight: 400;
-		font-size: clamp(28px, 3.8vw, 52px);
+		font-size: clamp(30px, 5vw, 55px);
 		line-height: 1.18;
 		letter-spacing: 0.02em;
 		text-transform: uppercase;
@@ -419,6 +419,133 @@ p:has(.button-element.button) {
 
 .submenu-toggle {
 	display: none;
+}
+
+.repeatable_text_images_left_right {
+	position: relative;
+	z-index: 20;
+	.content-inner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.text-wrapper {
+		text-align: center;
+		padding-top: 100px;
+    padding-bottom: 100px;
+		h2 {
+			font-size: clamp(30px, 5vw, 55px);
+			font-weight: 400;
+			line-height: 1.2;
+			text-transform: uppercase;
+			color: $color_secondary;
+			margin: 0 0;
+		}
+		p:has(.button-element.button) {
+			margin-top: 30px;
+			justify-content: center;
+		}
+	}
+	.feat-image {
+		margin: 0 0;
+		position: relative;
+		width: 70vw;
+    height: 30vw;
+		img {
+			display: block;
+			position: absolute;
+			top: 0;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 100%;
+			object-position: center;
+			transform: scale(1.2)
+		}
+		&.image-left {
+			left: -5vw;
+			transform: translateY(8vw);
+		}
+		&.image-right {
+			top: -7vw;
+			right: -5vw;
+		}
+	}
+}
+
+.repeatable_partners_logo {
+	position: relative;
+	min-height: 300px;
+	margin-bottom: 50px;
+	.content-inner {
+		position: relative;
+		z-index: 10;
+	}
+	.text-wrapper {
+		text-align: center;
+		padding: 150px 0 80px;
+		h2 {
+			font-size: clamp(30px, 5vw, 55px);
+			font-weight: 400;
+			line-height: 1.2;
+			text-transform: uppercase;
+			color: #FFF;
+			margin: 0 0;
+			letter-spacing: 0.06em;
+		}
+	}
+	.partner-logos-inner {
+		background: #E0E1D5;
+		display: flex;
+		justify-content: center;
+		gap: 5rem;
+		padding: 50px 50px;
+		position: relative;
+		&:before {
+			content:"";
+			display: block;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: -12px;
+			left: 12px;
+			border: 2px solid $color_green;
+			pointer-events: none;
+		}
+		figure {
+			margin: 0 0;
+			a {
+				display: inline-block;
+			}
+			img {
+				width: auto;
+				height: 60px;
+			}
+		}
+	}
+	.background-image-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 85%;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		pointer-events: none;
+		&:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: $color_primary;
+			opacity: 0.65;
+		}
+	}
 }
 
 @include max(1080px) {

@@ -16,7 +16,7 @@ $tabwidth: 960px;
 $midwidth: 1024px;
 $deskwidth: 1200px;
 $xxl: 1500px;
-$wrapper: 1300px;
+$wrapper: 1400px;
 
 
 @mixin xxs { @media (min-width: $portrait) { @content; } }
