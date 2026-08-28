@@ -56,6 +56,93 @@ jQuery(document).ready(function ($) {
     });
   }
 
+  var counterSections = document.querySelectorAll('.repeatable_counters');
+
+  if (counterSections.length) {
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var counterDuration = 1800; // Splits "58K+" or "1,250.5%" into prefix, numeric target and suffix so the
+    // markup can keep whatever formatting was entered in the CMS.
+
+    var readCounter = function readCounter(text) {
+      var match = text.match(/\d[\d.,]*/);
+
+      if (!match) {
+        return null;
+      }
+
+      var number = match[0].replace(/,/g, '');
+      var decimals = number.split('.')[1];
+      return {
+        text: text,
+        prefix: text.slice(0, match.index),
+        suffix: text.slice(match.index + match[0].length),
+        target: parseFloat(number),
+        decimals: decimals ? decimals.length : 0,
+        grouped: match[0].indexOf(',') > -1
+      };
+    };
+
+    var formatCounter = function formatCounter(value, counter) {
+      var fixed = value.toFixed(counter.decimals);
+      var number = counter.grouped ? Number(fixed).toLocaleString('en-US', {
+        minimumFractionDigits: counter.decimals,
+        maximumFractionDigits: counter.decimals
+      }) : fixed;
+      return counter.prefix + number + counter.suffix;
+    };
+
+    var countUp = function countUp(el) {
+      var counter = readCounter(el.textContent.trim());
+
+      if (!counter) {
+        return;
+      }
+
+      var startTime = window.performance.now();
+
+      var step = function step(now) {
+        var progress = Math.min((now - startTime) / counterDuration, 1);
+
+        if (progress < 1) {
+          el.textContent = formatCounter(counter.target * (1 - Math.pow(1 - progress, 3)), counter);
+          window.requestAnimationFrame(step);
+        } else {
+          el.textContent = counter.text;
+        }
+      };
+
+      el.textContent = formatCounter(0, counter);
+      window.requestAnimationFrame(step);
+    };
+
+    counterSections.forEach(function (section) {
+      var numbers = section.querySelectorAll('.counter-item-inner h3');
+
+      if (!numbers.length || reducedMotion || !('IntersectionObserver' in window)) {
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          // Sections still out of view get the hidden start state, so one that is
+          // already on screen when the page loads never flashes.
+          entry.target.classList.add('counters-animate');
+
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          observer.unobserve(entry.target);
+          entry.target.classList.add('is-in-view');
+          numbers.forEach(countUp);
+        });
+      }, {
+        threshold: 0.3
+      });
+      observer.observe(section);
+    });
+  }
+
   if ($('.categories ul li').length) {
     var countCategories = $('.categories ul li').length;
 

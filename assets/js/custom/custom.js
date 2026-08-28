@@ -19,6 +19,80 @@ jQuery(document).ready(function($) {
 		});
 	}
 
+	const counterSections = document.querySelectorAll('.repeatable_counters');
+	if( counterSections.length ) {
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const counterDuration = 1800;
+
+		// Splits "58K+" or "1,250.5%" into prefix, numeric target and suffix so the
+		// markup can keep whatever formatting was entered in the CMS.
+		const readCounter = function(text) {
+			const match = text.match(/\d[\d.,]*/);
+			if( !match ) {
+				return null;
+			}
+			const number = match[0].replace(/,/g, '');
+			const decimals = number.split('.')[1];
+			return {
+				text: text,
+				prefix: text.slice(0, match.index),
+				suffix: text.slice(match.index + match[0].length),
+				target: parseFloat(number),
+				decimals: decimals ? decimals.length : 0,
+				grouped: match[0].indexOf(',') > -1
+			};
+		};
+
+		const formatCounter = function(value, counter) {
+			const fixed = value.toFixed(counter.decimals);
+			const number = counter.grouped ? Number(fixed).toLocaleString('en-US', {
+				minimumFractionDigits: counter.decimals,
+				maximumFractionDigits: counter.decimals
+			}) : fixed;
+			return counter.prefix + number + counter.suffix;
+		};
+
+		const countUp = function(el) {
+			const counter = readCounter(el.textContent.trim());
+			if( !counter ) {
+				return;
+			}
+			const startTime = window.performance.now();
+			const step = function(now) {
+				const progress = Math.min((now - startTime) / counterDuration, 1);
+				if( progress < 1 ) {
+					el.textContent = formatCounter(counter.target * (1 - Math.pow(1 - progress, 3)), counter);
+					window.requestAnimationFrame(step);
+				} else {
+					el.textContent = counter.text;
+				}
+			};
+			el.textContent = formatCounter(0, counter);
+			window.requestAnimationFrame(step);
+		};
+
+		counterSections.forEach(function(section) {
+			const numbers = section.querySelectorAll('.counter-item-inner h3');
+			if( !numbers.length || reducedMotion || !('IntersectionObserver' in window) ) {
+				return;
+			}
+			const observer = new IntersectionObserver(function(entries) {
+				entries.forEach(function(entry) {
+					// Sections still out of view get the hidden start state, so one that is
+					// already on screen when the page loads never flashes.
+					entry.target.classList.add('counters-animate');
+					if( !entry.isIntersecting ) {
+						return;
+					}
+					observer.unobserve(entry.target);
+					entry.target.classList.add('is-in-view');
+					numbers.forEach(countUp);
+				});
+			}, { threshold: 0.3 });
+			observer.observe(section);
+		});
+	}
+
 	if( $('.categories ul li').length ) {
 		const countCategories = $('.categories ul li').length;
 		if( countCategories > 1 ) {
