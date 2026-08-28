@@ -106,6 +106,23 @@
 .acf-flexible-content [data-layout=text_content_3_columns] .acf-field-group[data-name=columns] .acf-fields .acf-field[data-name=column1], .acf-flexible-content [data-layout=text_content_3_columns] .acf-field-group[data-name=columns] .acf-fields .acf-field[data-name=column2], .acf-flexible-content [data-layout=text_content_3_columns] .acf-field-group[data-name=columns] .acf-fields .acf-field[data-name=column3] {
   width: 33.333%;
 }
+.acf-flexible-content [data-name=partner_logos_gallery] .acf-gallery-attachment {
+  width: 10% !important;
+}
+.acf-flexible-content [data-name=partner_logos_gallery] .acf-gallery-attachment .thumbnail {
+  transform: none !important;
+}
+.acf-flexible-content [data-name=partner_logos_gallery] .acf-gallery-attachment .thumbnail img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(0.8) !important;
+}
 
 .acf-field-group[data-name=topbottom_spacing] {
   width: 100%;

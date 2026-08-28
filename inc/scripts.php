@@ -64,9 +64,17 @@ function bellaworks_scripts() {
   );
 
   wp_enqueue_script(
+    'owl-carousel',
+    'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js',
+    array('jquery'),
+    '2.3.4',
+    true
+  );
+
+  wp_enqueue_script(
     'bellaworks-custom',
     get_template_directory_uri() . '/assets/js/custom/custom.js',
-    array(), '20260218', true
+    array('jquery', 'owl-carousel'), '20260827', true
   );
 
 	wp_localize_script( 'bellaworks-custom', 'frontajax', array(

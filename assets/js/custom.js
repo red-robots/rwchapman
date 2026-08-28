@@ -122,6 +122,39 @@ jQuery(document).ready(function ($) {
   // });
 
 
+  if ($('.partner-logos-inner.owl-carousel').length) {
+    $('.partner-logos-inner.owl-carousel').owlCarousel({
+      items: 5,
+      loop: true,
+      autoplay: true,
+      autoplayTimeout: 4000,
+      autoplayHoverPause: true,
+      nav: false,
+      dots: false,
+      margin: 40,
+      smartSpeed: 600,
+      responsive: {
+        0: {
+          items: 2,
+          margin: 20
+        },
+        600: {
+          items: 3,
+          margin: 30
+        },
+        1000: {
+          items: 5,
+          margin: 40
+        }
+      }
+    });
+    $(document).on('click', '.custom-slide-previous, .custom-slide-next', function (e) {
+      e.preventDefault();
+      var direction = $(this).hasClass('custom-slide-next') ? 'next' : 'prev';
+      $(this).closest('.partner-logos').find('.partner-logos-inner.owl-carousel').trigger(direction + '.owl.carousel');
+    });
+  }
+
   var swiperElements = document.querySelectorAll('.slideshow');
 
   if (swiperElements.length) {
