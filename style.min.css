@@ -1295,6 +1295,8 @@ p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:fl
 .closeMenuToggle::before{-webkit-transform:translate(-50%,-50%) rotate(45deg);transform:translate(-50%,-50%) rotate(45deg)}
 .closeMenuToggle::after{-webkit-transform:translate(-50%,-50%) rotate(-45deg);transform:translate(-50%,-50%) rotate(-45deg)}
 .submenu-toggle{display:none}
+.section-title{font-size:clamp(30px,5vw,55px);font-weight:400;line-height:1.2;text-transform:uppercase;color:#5a88c4;margin:0;letter-spacing:.06em}
+.section-title.center{text-align:center}
 .repeatable_text_images_left_right{position:relative;z-index:20}
 .repeatable_text_images_left_right .content-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .repeatable_text_images_left_right .text-wrapper{text-align:center;padding-top:100px;padding-bottom:100px}
@@ -1354,8 +1356,25 @@ p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:fl
 .repeatable_counters .counter-item-inner{text-align:center}
 .repeatable_counters .counter-item-inner h3{font-family:"Fahkwang",sans-serif;font-size:clamp(50px,10vw,120px);font-weight:500;line-height:1;letter-spacing:.01em;font-variant-numeric:tabular-nums;color:transparent;margin:0;-webkit-text-stroke:2px #52884e}
 .repeatable_counters .counter-item-inner p{font-size:clamp(14px,1.5vw,17px);line-height:1.5;color:#fff;margin:clamp(9px,1.1vw,15px) 0 0}
+.repeatable_oval_ctas{padding-top:80px;padding-bottom:80px}
+.repeatable_oval_ctas .text-wrapper{text-align:center;margin-bottom:50px}
+.ctas-grid .ctas-grid-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
+.ctas-grid .cta{width:33.33%;max-width:360px;margin:0 auto;padding:20px}
+.ctas-grid .cta .ctaLink{display:block;position:relative;width:100%;text-decoration:none;padding-bottom:120%;overflow:hidden;border-radius:100%;background-color:#5a88c4}
+.ctas-grid .cta .ctaLink .ctaName{padding:30px;position:absolute;top:0;left:0;z-index:5;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}
+.ctas-grid .cta .ctaLink .ctaName span{display:block;width:100%;text-align:center;font-family:"Fahkwang",sans-serif;font-size:clamp(18px,5vw,25px);font-weight:500;line-height:1.2;letter-spacing:.05em;text-transform:uppercase;color:#fff}
+.ctas-grid .cta .ctaLink .ctaImage{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center}
+.ctas-grid .cta .ctaLink .ctaImage:before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:-webkit-gradient(linear,left top,left bottom,color-stop(10%,rgba(255,255,255,0)),color-stop(90%,#5a88c4));background:linear-gradient(to bottom,rgba(255,255,255,0) 10%,#5a88c4 90%);z-index:2}
+.repeatable_callout_box{position:relative;padding-bottom:80px}
+.repeatable_callout_box .callout-box-inner{position:relative;z-index:5}
+.repeatable_callout_box .callout-box-inner .text-wrapper{background:#e0e1d5;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:2rem;padding:30px 30px;min-height:180px;position:relative;z-index:2}
+.repeatable_callout_box .callout-box-inner .text-wrapper:after{content:"";display:block;width:100%;height:100%;position:absolute;top:-12px;left:12px;pointer-events:none;z-index:-1;border:2px solid #52884e}
+.repeatable_callout_box .callout-box-inner .section-title{font-size:30px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:#0d3647;margin:0}
+.repeatable_callout_box .background-image-overlay{position:absolute;bottom:0;left:0;width:100%;height:80%;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none}
+.repeatable_callout_box .background-image-overlay:before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:#5a88c4;opacity:.8}
 @media screen and (max-width:1080px){.repeatable_partners_logo .partner-logos-inner{padding:40px 50px}
 .repeatable_partners_logo .partner-logos-inner figure img{height:48px}
+.ctas-grid .cta{width:50%}
 .menu-toggle{display:block}
 .primary-navigation{position:fixed;inset:0;z-index:200;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;background:#0d3647;-webkit-transform:translateX(100%);transform:translateX(100%);visibility:hidden;-webkit-transition:visibility .4s ease,-webkit-transform .4s ease;transition:visibility .4s ease,-webkit-transform .4s ease;transition:transform .4s ease,visibility .4s ease;transition:transform .4s ease,visibility .4s ease,-webkit-transform .4s ease}
 .primary-navigation.open{-webkit-transform:translateX(0);transform:translateX(0);visibility:visible}
@@ -1388,6 +1407,7 @@ h6{font-size:clamp(12px,1.5vw,15px)}
 .repeatable_three_column_title_middle .wrapper{grid-template-columns:minmax(0,1fr)}
 .repeatable_three_column_title_middle .content-left,.repeatable_three_column_title_middle .content-right{grid-column:1}
 .repeatable_counters .counter-item{width:100%}
+.ctas-grid .cta{width:100%}
 .hero{min-height:100svh}
 .header-inner{padding-top:16px;padding-bottom:16px}
 }@media(print),(prefers-reduced-motion:reduce){.animated{-webkit-animation-duration:1ms !important;animation-duration:1ms !important;-webkit-transition-duration:1ms !important;transition-duration:1ms !important;-webkit-animation-iteration-count:1 !important;animation-iteration-count:1 !important}
