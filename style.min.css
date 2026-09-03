@@ -1372,6 +1372,26 @@ p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:fl
 .repeatable_callout_box .callout-box-inner .section-title{font-size:30px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:#0d3647;margin:0}
 .repeatable_callout_box .background-image-overlay{position:absolute;bottom:0;left:0;width:100%;height:80%;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none}
 .repeatable_callout_box .background-image-overlay:before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:#5a88c4;opacity:.8}
+.site-footer{position:relative;padding:clamp(48px,5vw,70px) 0;background:#0d3647;color:#fff;text-align:center}
+.site-footer .footer-logo{max-width:110px;margin:0 auto clamp(32px,4vw,56px)}
+.site-footer .footer-logo img{display:block;width:100%;height:auto}
+.site-footer .flexwrap{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
+.site-footer .footer-column{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-flex:1;-ms-flex:1 1 0;flex:1 1 0;min-width:0;padding:8px clamp(16px,3vw,40px)}
+.site-footer .footer-column p{margin:0;font-size:16px;line-height:1.55;color:#5a88c4}
+.site-footer .footer-column a{color:#5a88c4;text-decoration:underline;text-underline-offset:3px}
+.site-footer .footer-column a:hover,.site-footer .footer-column a:focus{color:#fff}
+.site-footer .footer-column a:focus{outline:1px solid #fff;outline-offset:1px}
+.site-footer .footer-column+.footer-column{border-left:2px solid #52884e}
+.site-footer .footer-column.footer-column-email a{text-decoration:none}
+.site-footer .footer-social-links{margin-top:clamp(24px,3vw,40px)}
+.site-footer .footer-social-links ul{margin:0;padding:0;list-style:none;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;gap:1rem}
+.site-footer .footer-social-links a{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;color:#5a88c4;line-height:0;text-decoration:none;-webkit-transition:color .3s ease;transition:color .3s ease}
+.site-footer .footer-social-links a:hover,.site-footer .footer-social-links a:focus{color:#fff}
+.site-footer .footer-social-links a svg{display:block;width:16px;height:16px}
+.site-footer .footer-social-links a svg,.site-footer .footer-social-links a svg path{fill:currentColor}
+.site-footer .footer-social-links a i{font-size:25px;-webkit-transition:all .3s ease;transition:all .3s ease}
+.site-footer .footer-social-links a:hover i,.site-footer .footer-social-links a:focus i{color:#fff}
+.site-footer .footer-social-links a:focus{outline:1px solid #fff;outline-offset:1px}
 @media screen and (max-width:1080px){.repeatable_partners_logo .partner-logos-inner{padding:40px 50px}
 .repeatable_partners_logo .partner-logos-inner figure img{height:48px}
 .ctas-grid .cta{width:50%}
@@ -1410,6 +1430,10 @@ h6{font-size:clamp(12px,1.5vw,15px)}
 .ctas-grid .cta{width:100%}
 .hero{min-height:100svh}
 .header-inner{padding-top:16px;padding-bottom:16px}
+.site-footer .footer-logo{max-width:90px}
+.site-footer .flexwrap{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}
+.site-footer .footer-column{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;width:100%;padding:16px 0}
+.site-footer .footer-column+.footer-column{border-left:0;border-top:1px solid #52884e}
 }@media(print),(prefers-reduced-motion:reduce){.animated{-webkit-animation-duration:1ms !important;animation-duration:1ms !important;-webkit-transition-duration:1ms !important;transition-duration:1ms !important;-webkit-animation-iteration-count:1 !important;animation-iteration-count:1 !important}
 }@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}
 100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}

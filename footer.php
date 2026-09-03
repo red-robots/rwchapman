@@ -1,58 +1,56 @@
 	</div><!-- #content -->
 	
   <?php  
-  // $company_group_logo = get_field('company_group_logo', 'option');
-  // $company_website = get_field('company_website', 'option');
-  // $office_address = get_field('office_address', 'option');
-  // $office_phone = get_field('office_phone', 'option');
-  // $footer_message = get_field('footer_message', 'option');
-  // $restaurant_logos = get_field('restaurant_logos', 'option');
-  $social_media = get_field('social_media_links', 'option');
-  $footerContactInfo = get_field('footer_contact_information', 'option');
+  $footerLogo = get_field('footer_logo', 'option');
   ?>
-  <footer id="colophon" class="site-footer site-footer-v2" role="contentinfo">
+  <footer id="colophon" class="site-footer" role="contentinfo">
     <div class="wrapper">
+      <?php if($footerLogo) { ?>
+        <div class="footer-logo">
+          <img src="<?php echo $footerLogo['url']; ?>" alt="<?php echo $footerLogo['alt']; ?>">
+        </div>
+      <?php } ?>
+
+      <?php
+      $office_address = get_field('office_address', 'option');
+      $office_phone = get_field('office_phone', 'option');
+      $office_email = get_field('office_email', 'option');
+      $social_media = get_field('social_media_links', 'option');
+      ?>
+
       <div class="flexwrap">
-        <div class="flexcol site-icon"></div>
-        
-        <div class="flexgroup">
-          <?php if($footerContactInfo) { ?> 
-            <div class="flexcol footerContact">
-              <div class="textwrap">
-                <?php echo anti_email_spam($footerContactInfo) ?>
-              </div>
-            </div>
-          <?php } ?>
-          
-          <div class="flexcol footerQuickLinks">
-            <?php if( has_nav_menu('footer') ) { 
-              wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu','link_before'=>'<span>','link_after'=>'</span>','items_wrap'=>'<ul id="%1$s" class="%2$s">%3$s</ul>') ); ?>
-            <?php } ?> 
+        <?php if($office_phone) { ?>
+          <div class="footer-column footer-column-phone">
+            <p><?php echo $office_phone; ?></p>
           </div>
-        </div>
+        <?php } ?>
+        <?php if($office_address) { ?>
+          <div class="footer-column footer-column-address">
+            <p><?php echo $office_address; ?></p>
+          </div>
+        <?php } ?>
         
-        <div class="copyright-container">
-          <?php if($social_media) { ?>
-            <div class="social-media-links">
-              <?php foreach($social_media as $social) {
-                if($social['url'] && $social['icon']) { 
-                  $socialName = getCleanDomainName($social['url']);
-                  $socialName = ucwords($socialName);
-                  $socialSlug = strtolower($socialName);
-                  ?>
-                  <a href="<?php echo $social['url'] ?>" target="_blank" class="social-icon social-icon-<?php echo $socialSlug; ?>">
-                    <?php echo $social['icon']; ?>
-                    <span class="sr-only">Visit our <?php echo $socialName; ?></span>
-                  </a>
-                <?php } ?>
+        <?php if($office_email) { ?>
+          <div class="footer-column footer-column-email">
+            <p>
+              <?php if( filter_var(trim($office_email), FILTER_VALIDATE_EMAIL) ) { ?>  
+                <a href="mailto:<?php echo antispambot(trim($office_email),1); ?>"><?php echo antispambot(trim($office_email)); ?></a>
               <?php } ?>
-            </div>
-          <?php } ?>
-          <div class="copyright">
-            <span>&copy; <?php echo get_bloginfo('name') ?> <?php echo date('Y') ?></span>
+            </p>
           </div>
-        </div>
-        
+        <?php } ?>
+      </div>
+
+      <div class="footer-social-links">
+        <?php if($social_media) { ?>
+          <ul>
+          <?php foreach($social_media as $social) { ?>
+            <?php if( $social['link'] && $social['icon'] ) { ?>
+            <li><a href="<?php echo $social['link']; ?>" target="_blank" rel="noopener noreferrer"><?php echo $social['icon']; ?></a></li>
+            <?php } ?>
+          <?php } ?>
+          </ul>
+        <?php } ?>
       </div>
     </div>
   </footer>

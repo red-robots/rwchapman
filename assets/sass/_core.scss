@@ -996,6 +996,109 @@ p:has(.button-element.button) {
 	}
 }
 
+/* Footer */
+.site-footer {
+	position: relative;
+	padding: clamp(48px, 5vw, 70px) 0;
+	background: $color_primary;
+	color: #FFF;
+	text-align: center;
+	.footer-logo {
+		max-width: 110px;
+		margin: 0 auto clamp(32px, 4vw, 56px);
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+	.flexwrap {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
+		justify-content: center;
+	}
+	.footer-column {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1 1 0;
+		min-width: 0;
+		padding: 8px clamp(16px, 3vw, 40px);
+		p {
+			margin: 0 0;
+			font-size: 16px;
+			line-height: 1.55;
+			color: $color_secondary;
+		}
+		a {
+			color: $color_secondary;
+			text-decoration: underline;
+			text-underline-offset: 3px;
+			&:hover, &:focus {
+				color: #FFF;
+			}
+			&:focus {
+				outline: 1px solid #FFF;
+				outline-offset: 1px;
+			}
+		}
+		+ .footer-column {
+			border-left: 2px solid $color_green;
+		}
+		&.footer-column-email a {
+			text-decoration: none;
+		}
+	}
+	.footer-social-links {
+		margin-top: clamp(24px, 3vw, 40px);
+		ul {
+			margin: 0 0;
+			padding: 0;
+			list-style: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 1rem;
+		}
+		a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: $color_secondary;
+			line-height: 0;
+			text-decoration: none;
+			transition: color 0.3s ease;
+			&:hover,
+			&:focus {
+				color: #FFF;
+			}
+			svg {
+				display: block;
+				width: 16px;
+				height: 16px;
+			}
+			svg,
+			svg path {
+				fill: currentColor;
+			}
+			i {
+				font-size: 25px;
+				transition: all 0.3s ease;
+			}
+			&:hover, &:focus {
+				i {
+					color: #FFF;
+				}
+			}
+			&:focus {
+				outline: 1px solid #FFF;
+				outline-offset: 1px;
+			}
+		}
+	}
+}
+
 @include max(1080px) {
 	.menu-toggle {
 		display: block;
@@ -1083,6 +1186,23 @@ p:has(.button-element.button) {
 	.header-inner {
 		padding-top: 16px;
 		padding-bottom: 16px;
+	}
+	.site-footer {
+		.footer-logo {
+			max-width: 90px;
+		}
+		.flexwrap {
+			flex-direction: column;
+		}
+		.footer-column {
+			flex: 1 1 auto;
+			width: 100%;
+			padding: 16px 0;
+			+ .footer-column {
+				border-left: none;
+				border-top: 1px solid $color_green;
+			}
+		}
 	}
 }
 
