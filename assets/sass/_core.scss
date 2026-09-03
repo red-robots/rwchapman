@@ -1206,3 +1206,16 @@ p:has(.button-element.button) {
 	}
 }
 
+@media screen and (max-width: 782px) {
+	body.logged-in.admin-bar {
+		.site-footer {
+			padding-top: 46px;
+		}
+		.closeMenuToggle {
+			top: 57px;
+		}
+		.main-navigation {
+			padding-top: 100px;
+		}
+	}
+}

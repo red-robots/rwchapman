@@ -1414,6 +1414,9 @@ p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:fl
 .repeatable_three_column_title_middle .content-title{grid-column:1/-1;grid-row:auto}
 .repeatable_three_column_title_middle .content-left{grid-column:1;grid-row:auto}
 .repeatable_three_column_title_middle .content-right{grid-column:2;grid-row:auto}
+}@media screen and (max-width:782px){body.logged-in.admin-bar .site-footer{padding-top:46px}
+body.logged-in.admin-bar .closeMenuToggle{top:57px}
+body.logged-in.admin-bar .main-navigation{padding-top:100px}
 }@media screen and (max-width:768px){h2{font-size:clamp(20px,5vw,35px)}
 h3{font-size:clamp(18px,4vw,25px)}
 h4{font-size:clamp(16px,3vw,20px)}
