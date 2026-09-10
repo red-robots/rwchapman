@@ -11,7 +11,7 @@
     <div data-group="<?php echo get_row_layout() ?>" id="repeatable_<?php echo get_row_layout() ?>_<?php echo $i ?>" class="repeatable repeatable_<?php echo get_row_layout() ?>">
       <div class="content-inner">
         <?php if( $image_left ) { ?>
-          <figure class="feat-image image-left">
+          <figure class="feat-image --desktop image-left">
             <img src="<?php echo $image_left['url']; ?>" alt="<?php echo $image_left['alt']; ?>">
           </figure>
         <?php } ?>
@@ -21,10 +21,24 @@
         </div>
         
         <?php if( $image_right ) { ?>
-          <figure class="feat-image image-right">
+          <figure class="feat-image --desktop image-right">
             <img src="<?php echo $image_right['url']; ?>" alt="<?php echo $image_right['alt']; ?>">
           </figure>
         <?php } ?>
+
+        <div class="featured-images-mobile">
+          <?php if( $image_left ) { ?>
+            <figure class="feat-image image-left">
+              <img src="<?php echo $image_left['url']; ?>" alt="<?php echo $image_left['alt']; ?>">
+            </figure>
+          <?php } ?>
+          
+          <?php if( $image_right ) { ?>
+            <figure class="feat-image image-right">
+              <img src="<?php echo $image_right['url']; ?>" alt="<?php echo $image_right['alt']; ?>">
+            </figure>
+          <?php } ?>
+        </div>
       </div>
     </div>
   <?php } ?>

@@ -319,6 +319,14 @@ p:has(.button-element.button) {
 	margin: 0 auto;
 	padding-left: clamp(20px, 4vw, 64px);
 	padding-right: clamp(20px, 4vw, 64px);
+	@include desk {
+		max-width: 1250px;
+	}
+	@include max($midwidth) {
+		padding-left: 10vw;
+    padding-right: 10vw;
+	}
+	
 	h1, h2, h3 {
 		font-family: $font_secondary;
 		font-weight: 400;
@@ -438,6 +446,7 @@ p:has(.button-element.button) {
 	position: relative;
 	z-index: 20;
 	.content-inner {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -446,6 +455,8 @@ p:has(.button-element.button) {
 		text-align: center;
 		padding-top: 100px;
     padding-bottom: 100px;
+		padding-left: clamp(30px, 5vw, 80px);
+    padding-right: clamp(30px, 5vw, 80px);
 		h2 {
 			font-size: clamp(30px, 5vw, 55px);
 			font-weight: 400;
@@ -483,6 +494,49 @@ p:has(.button-element.button) {
 		&.image-right {
 			top: -7vw;
 			right: -5vw;
+		}
+	}
+
+	.featured-images-mobile {
+		display: none;
+	}
+
+	@include max($midwidth) {
+		.content-inner {
+			flex-wrap: wrap;
+		}
+		.feat-image.--desktop {
+			display: none;
+		}
+		.featured-images-mobile {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			gap: 30px;
+			padding-bottom: 50px;
+			.feat-image {
+				left: unset;
+				right: unset;
+				width: 40%;
+				height: auto;
+				padding-bottom: 50%;
+				img {
+					transform: none;
+				}
+				&.image-right {
+					top: 0;
+				}
+				&.image-left {
+					transform: translateY(0);
+				}
+			}
+		}
+		&:has(.featured-images-mobile .feat-image) {
+			.text-wrapper {
+				padding-bottom: 50px;
+			}
 		}
 	}
 }
@@ -908,6 +962,7 @@ p:has(.button-element.button) {
 					letter-spacing: 0.05em;
 					text-transform: uppercase;
 					color: #FFF;
+					transition: all 0.3s ease;
 				}
 			}
 			.ctaImage {
@@ -922,13 +977,29 @@ p:has(.button-element.button) {
 					content:"";
 					display: block;
 					position: absolute;
-					top: 0;
+					bottom: 0;
 					left: 0;
 					width: 100%;
 					height: 100%;
 					background: linear-gradient(to bottom,  rgba(255,255,255,0) 10%, $color_secondary 90%);
 					z-index: 2;
+					transition: all 0.5s ease;
 				}
+			}
+			&:hover, &:focus {
+				.ctaImage {
+					&:before {
+						height: 280%;
+					}
+				}
+				.ctaName span {
+					transform: scale(1.08);
+					text-shadow: 0 4px 5px rgba(0,0,0,0.5);
+				}
+			}
+			&:focus, &:focus-visible {
+				outline: 2px solid $color_primary;
+				outline-offset: 2px;
 			}
 		}
 	}
