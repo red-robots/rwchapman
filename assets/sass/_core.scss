@@ -1179,6 +1179,7 @@ p:has(.button-element.button) {
 	}
 }
 
+
 @include max(1080px) {
 	.menu-toggle {
 		display: block;
