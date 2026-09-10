@@ -1065,6 +1065,17 @@ p:has(.button-element.button) {
 			opacity: 0.8;
 		}
 	}
+	@include max($tabwidth) {
+		.callout-box-inner .text-wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			padding-bottom: 50px;
+		}
+	}
 }
 
 /* Footer */
@@ -1100,14 +1111,14 @@ p:has(.button-element.button) {
 			margin: 0 0;
 			font-size: 16px;
 			line-height: 1.55;
-			color: $color_secondary;
+			color: #FFF;
 		}
 		a {
-			color: $color_secondary;
+			color: #FFF;
 			text-decoration: underline;
 			text-underline-offset: 3px;
 			&:hover, &:focus {
-				color: #FFF;
+				color: $color_secondary;
 			}
 			&:focus {
 				outline: 1px solid #FFF;
@@ -1136,14 +1147,10 @@ p:has(.button-element.button) {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			color: $color_secondary;
+			color: #FFF;
 			line-height: 0;
 			text-decoration: none;
-			transition: color 0.3s ease;
-			&:hover,
-			&:focus {
-				color: #FFF;
-			}
+			transition: all 0.3s ease;
 			svg {
 				display: block;
 				width: 16px;
@@ -1154,12 +1161,14 @@ p:has(.button-element.button) {
 				fill: currentColor;
 			}
 			i {
+				color: #FFF;
 				font-size: 25px;
 				transition: all 0.3s ease;
 			}
 			&:hover, &:focus {
+				transform: scale(1.08);
 				i {
-					color: #FFF;
+					color: $color_secondary;
 				}
 			}
 			&:focus {
