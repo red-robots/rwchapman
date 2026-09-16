@@ -1081,7 +1081,7 @@ p:has(.button-element.button) {
 /* Footer */
 .site-footer {
 	position: relative;
-	padding: clamp(48px, 5vw, 70px) 0;
+	padding: clamp(48px, 5vw, 70px) 0 clamp(72px, 8vw, 120px);
 	background: $color_primary;
 	color: #FFF;
 	text-align: center;
@@ -1282,6 +1282,9 @@ p:has(.button-element.button) {
 			+ .footer-column {
 				border-left: none;
 				border-top: 1px solid $color_green;
+			}
+			&.footer-column-address {
+				padding-bottom: 60px;
 			}
 		}
 	}
