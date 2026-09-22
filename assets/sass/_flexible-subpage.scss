@@ -234,3 +234,374 @@
 		}
 	}
 }
+
+/* Title Band */
+.repeatable_title_band {
+	position: relative;
+	z-index: 20;
+	color: #FFF;
+	background-color: $color_secondary;
+	padding: clamp(150px, 14.5vw, 208px) 0 clamp(40px, 4vw, 55px);
+	.section-title {
+		color: #FFF;
+		font-weight: 300;
+		strong {
+			font-weight: 600;
+		}
+	}
+	@include max($tabwidth) {
+		padding-bottom: clamp(40px, 8vw, 70px);
+	}
+}
+
+/* Two-Column Text with Circle Image */
+.repeatable_two_column_text_with_circle_image {
+	position: relative;
+	z-index: 30;
+	padding-top: clamp(50px, 6vw, 88px);
+	.content-inner {
+		padding-bottom: clamp(50px, 6vw, 90px);
+		border-bottom: 1px solid $color_green;
+	}
+	.text-columns {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		column-gap: clamp(30px, 4.5vw, 64px);
+		row-gap: 30px;
+		max-width: 840px;
+		align-items: start;
+	}
+	.column {
+		font-size: 16px;
+		line-height: 1.5;
+		color: $color_primary;
+		p {
+			margin: 0 0;
+			+ p {
+				margin-top: 1.3em;
+			}
+		}
+		a:not(.button) {
+			color: $color_primary;
+		}
+	}
+	.buttons {
+		margin-top: clamp(30px, 4vw, 50px);
+		.button {
+			padding: 18px 28px 16px;
+		}
+	}
+	.circle-image {
+		position: absolute;
+		top: clamp(-100px, -7vw, -40px);
+		right: max(-190px, -13vw);
+		width: clamp(260px, 40vw, 580px);
+		height: clamp(300px, 46vw, 662px);
+		margin: 0 0;
+		border-radius: 50% / 50%;
+		overflow: hidden;
+		z-index: 2;
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+	@include max($deskwidth) {
+		.text-columns {
+			max-width: 62%;
+		}
+	}
+	@include max($tabwidth) {
+		padding-bottom: 0;
+		.text-columns {
+			max-width: none;
+		}
+		.circle-image {
+			position: relative;
+			top: auto;
+			right: auto;
+			width: min(70vw, 420px);
+			height: min(78vw, 470px);
+			margin: 40px auto 0;
+		}
+	}
+	@include max($xswidth) {
+		.text-columns {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+}
+
+/* Title Left / Text Right */
+.repeatable_title_left_text_right {
+	position: relative;
+	z-index: 20;
+	padding: clamp(50px, 7vw, 96px) 0 clamp(60px, 9vw, 140px);
+	.content-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+		column-gap: clamp(30px, 5vw, 90px);
+		row-gap: 30px;
+		align-items: start;
+	}
+	.content-title {
+		h1, h2, h3, h4, h5, h6 {
+			font-size: clamp(30px, 5vw, 55px);
+			font-weight: 600;
+			line-height: 1.18;
+			text-transform: uppercase;
+			letter-spacing: 0.02em;
+			color: $color_secondary;
+			margin: 0 0;
+		}
+	}
+	.section-text {
+		font-size: 16px;
+		line-height: 1.5;
+		color: $color_primary;
+		p {
+			margin: 0 0;
+			+ p {
+				margin-top: 1.3em;
+			}
+		}
+	}
+	@include max($xswidth) {
+		.content-inner {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+}
+
+/* Contact Form */
+.repeatable_contact_form {
+	position: relative;
+	z-index: 20;
+	padding: clamp(50px, 5vw, 75px) 0 clamp(80px, 14vw, 200px);
+	.content-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+		column-gap: clamp(30px, 4vw, 55px);
+		row-gap: 40px;
+		align-items: start;
+	}
+	.intro-text {
+		max-width: 330px;
+		padding-bottom: 40px;
+		border-bottom: 1px solid $color_green;
+		font-size: 16px;
+		line-height: 1.3;
+		color: $color_primary;
+		p {
+			margin: 0 0;
+			+ p {
+				margin-top: 1.3em;
+			}
+		}
+		strong {
+			font-weight: 700;
+		}
+		a {
+			color: $color_primary;
+		}
+	}
+	.contact-form-box {
+		position: relative;
+		z-index: 2;
+		background: $color_cream;
+		padding: clamp(30px, 4.5vw, 66px) clamp(20px, 6vw, 87px) clamp(30px, 4.5vw, 63px);
+		&:after {
+			content: "";
+			display: block;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: -12px;
+			left: 10px;
+			pointer-events: none;
+			z-index: -1;
+			border: 2px solid $color_green;
+		}
+	}
+	.gform_wrapper {
+		.gform_heading {
+			display: none;
+		}
+		.gform_fields {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+			gap: 16px;
+		}
+		.gfield {
+			grid-column: 1 / -1;
+			margin: 0 0;
+		}
+		.gfield_label {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			clip: rect(0,0,0,0);
+			margin: -1px;
+		}
+		.ginput_complex {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 16px;
+			> span {
+				display: block;
+				margin: 0 0;
+				padding: 0 0;
+				&.name_prefix,
+				&.name_middle,
+				&.name_suffix {
+					display: none;
+				}
+			}
+			label {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				overflow: hidden;
+				clip: rect(0,0,0,0);
+				margin: -1px;
+			}
+		}
+		.ginput_container {
+			margin: 0 0;
+		}
+		input[type="text"],
+		input[type="email"],
+		input[type="tel"],
+		textarea {
+			display: block;
+			width: 100%;
+			min-height: 51px;
+			margin: 0 0;
+			padding: 14px 25px;
+			border: none;
+			border-radius: 0;
+			background: #FFF;
+			font-family: $font_secondary;
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 1.3;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			color: $color_primary;
+			box-shadow: none;
+			appearance: none;
+			&::placeholder {
+				color: $color_primary;
+				opacity: 1;
+			}
+			&:focus {
+				outline: 2px solid $color_secondary;
+				outline-offset: 0;
+			}
+		}
+		textarea {
+			height: 101px;
+			min-height: 101px;
+			resize: vertical;
+		}
+		.gfield_required {
+			display: none;
+		}
+		.gfield_error {
+			input[type="text"],
+			input[type="email"],
+			textarea {
+				outline: 2px solid #c02b0a;
+			}
+		}
+		.gfield_validation_message,
+		.validation_message {
+			margin: 6px 0 0;
+			padding: 0 0;
+			border: none;
+			background: none;
+			font-family: $font_secondary;
+			font-size: 12px;
+			font-weight: 500;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+			color: #c02b0a;
+		}
+		.gform_validation_errors {
+			margin: 0 0 16px;
+			padding: 12px 16px;
+			border: 1px solid #c02b0a;
+			background: #FFF;
+			box-shadow: none;
+			border-radius: 0;
+			h2 {
+				font-family: $font_secondary;
+				font-size: 13px;
+				font-weight: 500;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: #c02b0a;
+				margin: 0 0;
+			}
+		}
+		.gform_footer {
+			display: flex;
+			justify-content: center;
+			margin: clamp(30px, 3.5vw, 52px) 0 0;
+			padding: 0 0;
+			input[type="submit"],
+			button[type="submit"] {
+				appearance: none;
+				display: inline-block;
+				min-width: 209px;
+				margin: 0 0;
+				padding: 16px 28px 14px;
+				border: none;
+				border-radius: 0;
+				background-color: $color_primary;
+				color: #FFF;
+				font-family: $font_secondary;
+				font-size: 13px;
+				font-weight: 500;
+				line-height: 1.2;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				cursor: pointer;
+				transition: all ease .3s;
+				&:hover, &:focus {
+					outline: none;
+					background-color: $color_green;
+					color: #FFF;
+				}
+			}
+		}
+	}
+	.gform_confirmation_message {
+		font-family: $font_secondary;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 1.4;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: $color_primary;
+		text-align: center;
+	}
+	@include max($tabwidth) {
+		.content-inner {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.intro-text {
+			max-width: none;
+			padding-bottom: 30px;
+		}
+	}
+	@include max($portrait) {
+		.gform_wrapper .ginput_complex {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+}

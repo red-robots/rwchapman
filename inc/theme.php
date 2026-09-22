@@ -71,6 +71,21 @@ add_filter( 'login_headertitle', 'bella_login_logo_url_title' );
 if( function_exists('acf_add_options_page') ) {acf_add_options_page();}
 
 /*-------------------------------------
+  Populate the "Form" select (contact_form layout) with Gravity Forms.
+---------------------------------------*/
+function bellaworks_acf_gravity_form_choices( $field ) {
+  $field['choices'] = array();
+  if ( class_exists('GFAPI') ) {
+    $forms = GFAPI::get_forms();
+    foreach ( $forms as $form ) {
+      $field['choices'][ $form['id'] ] = $form['title'];
+    }
+  }
+  return $field;
+}
+add_filter( 'acf/load_field/name=form', 'bellaworks_acf_gravity_form_choices' );
+
+/*-------------------------------------
   Hide Front End Admin Menu Bar
 ---------------------------------------*/
 if ( ! current_user_can( 'manage_options' ) ) {
