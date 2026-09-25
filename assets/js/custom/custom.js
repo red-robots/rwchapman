@@ -299,6 +299,31 @@ jQuery(document).ready(function($) {
 	}
 
 
+
+	/* News sidebar: show all archive months */
+	$(document).on('click', '.archives-toggle', function(){
+		var list = $('#' + $(this).attr('aria-controls'));
+		var expanded = !list.hasClass('is-expanded');
+		list.toggleClass('is-expanded', expanded);
+		$(this).attr('aria-expanded', expanded).html(expanded ? 'less' : 'more&hellip;');
+	});
+
+	/* News single: share story (native share sheet, falls back to menu) */
+	$(document).on('click', '.news-share-toggle', function(){
+		var btn = $(this);
+		if( navigator.share && window.matchMedia('(pointer: coarse)').matches ) {
+			navigator.share({ title: btn.data('title'), url: btn.data('url') }).catch(function(){});
+			return;
+		}
+		var open = btn.attr('aria-expanded') !== 'true';
+		btn.attr('aria-expanded', open).closest('.news-share').toggleClass('is-open', open);
+	});
+	$(document).on('click keyup', function(e){
+		if( (e.type === 'click' && !$(e.target).closest('.news-share').length) || e.key === 'Escape' ) {
+			$('.news-share.is-open').removeClass('is-open').find('.news-share-toggle').attr('aria-expanded', 'false');
+		}
+	});
+
 });
 
 

@@ -347,3 +347,63 @@ class WP_Image_Size_Limit {
 }
 $WP_Image_Size_Limit = new WP_Image_Size_Limit;
 add_action('admin_head', array($WP_Image_Size_Limit, 'load_styles'));
+
+/*-------------------------------------
+  News
+---------------------------------------*/
+// The page assigned the News template; its title band and callout box are
+// reused on single posts and post archives.
+function bellaworks_news_page_id() {
+  $pages = get_posts(array(
+    'post_type'      => 'page',
+    'post_status'    => 'publish',
+    'posts_per_page' => 1,
+    'fields'         => 'ids',
+    'meta_key'       => '_wp_page_template',
+    'meta_value'     => 'page-news.php',
+  ));
+  return ($pages) ? $pages[0] : 0;
+}
+
+// Render only the given subpage flexible layouts from another page.
+function bellaworks_render_page_layouts($page_id, $layouts = array()) {
+  if( !$page_id || !have_rows('subpage_flexible_content', $page_id) ) {
+    return;
+  }
+  $i = 1;
+  while( have_rows('subpage_flexible_content', $page_id) ) : the_row();
+    $layout = get_row_layout();
+    if( in_array($layout, $layouts) ) {
+      $filePath = locate_template('parts-flexible/subpage/' . $layout . '.php');
+      if( $filePath ) {
+        include( $filePath );
+      }
+    }
+    $i++;
+  endwhile;
+}
+
+function bellaworks_excerpt_length($length) {
+  return 45;
+}
+add_filter('excerpt_length', 'bellaworks_excerpt_length', 999);
+
+function bellaworks_excerpt_more($more) {
+  return '&hellip;';
+}
+add_filter('excerpt_more', 'bellaworks_excerpt_more');
+
+// "July 2026" instead of "Month: July 2026" on news archives.
+add_filter('get_the_archive_title_prefix', '__return_empty_string');
+
+// Posts per page on the News page and post archives (matches the design).
+function bellaworks_news_per_page() {
+  return 4;
+}
+
+function bellaworks_news_archive_query($query) {
+  if( !is_admin() && $query->is_main_query() && ($query->is_category() || $query->is_tag() || $query->is_date() || $query->is_author()) ) {
+    $query->set('posts_per_page', bellaworks_news_per_page());
+  }
+}
+add_action('pre_get_posts', 'bellaworks_news_archive_query');

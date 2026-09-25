@@ -1,51 +1,35 @@
 <?php
 /**
- * The template for displaying archive pages.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * News archives (category, tag, date, author). Uses the News page's
+ * title band and callout box around the listing.
  *
  * @package bellaworks
  */
+global $wp_query;
+get_header();
+$news_page_id = bellaworks_news_page_id();
+$news_query = $wp_query;
+?>
 
-get_header(); ?>
+<div id="primary" class="content-area flexible-content-internal page-news news-archive">
+  <main id="main" class="site-main" role="main">
 
-	<div id="primary" class="content-area-full">
-		<main id="main" class="site-main wrapper" role="main">
+    <?php bellaworks_render_page_layouts($news_page_id, array('title_band')); ?>
 
-		<?php
-		if ( have_posts() ) : ?>
+    <div class="news-archive-heading">
+      <div class="wrapper">
+        <div class="content-inner">
+          <?php the_archive_title( '<h2 class="archive-title">', '</h2>' ); ?>
+        </div>
+      </div>
+    </div>
 
-			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="taxonomy-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
+    <?php include( locate_template('parts/news-feed.php') ); ?>
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+    <?php bellaworks_render_page_layouts($news_page_id, array('callout_box')); ?>
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'parts/content', get_post_format() );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'parts/content', 'none' );
-
-		endif; ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+  </main><!-- #main -->
+</div><!-- #primary -->
 
 <?php
-get_sidebar();
 get_footer();
