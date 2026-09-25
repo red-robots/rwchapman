@@ -273,6 +273,93 @@ p:has(.button-element.button) {
 	}
 }
 
+/* Desktop dropdown */
+@include min(1081px) {
+	.main-navigation {
+		.menu-item-has-children {
+			position: relative;
+			> a {
+				gap: 8px;
+				&::before {
+					content: "";
+					order: 2;
+					width: 6px;
+					height: 6px;
+					margin-top: -3px;
+					border-right: 1.5px solid currentColor;
+					border-bottom: 1.5px solid currentColor;
+					transform: rotate(45deg);
+					transition: transform 0.3s ease, margin 0.3s ease;
+				}
+			}
+			&:hover > a::before,
+			&:focus-within > a::before {
+				margin-top: 3px;
+				transform: rotate(-135deg);
+			}
+			&:hover > .sub-menu,
+			&:focus-within > .sub-menu {
+				opacity: 1;
+				visibility: visible;
+				transform: translate(-50%, 0);
+			}
+		}
+		ul.sub-menu {
+			position: absolute;
+			top: calc(100% + 2px);
+			left: 50%;
+			z-index: 50;
+			display: block;
+			min-width: 250px;
+			margin: 0;
+			padding: 12px 0;
+			list-style: none;
+			background: $color_primary;
+			border-top: 3px solid $color_green;
+			box-shadow: 0 14px 30px rgba(13, 54, 71, 0.25);
+			opacity: 0;
+			visibility: hidden;
+			transform: translate(-50%, 8px);
+			transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+			// Bridge the gap under the header border so hover isn't lost.
+			&::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 100%;
+				height: 8px;
+			}
+			li {
+				display: block;
+			}
+			a {
+				display: block;
+				padding: 12px 26px;
+				font-size: 12px;
+				letter-spacing: 0.12em;
+				white-space: nowrap;
+				color: #FFF;
+				transition: color 0.2s ease, background-color 0.2s ease;
+				&::after {
+					display: none;
+				}
+				&:hover,
+				&:focus {
+					color: #FFF;
+					background: rgba(90, 136, 196, 0.25);
+				}
+			}
+			li + li a {
+				border-top: 1px solid rgba(255, 255, 255, 0.08);
+			}
+			.current-menu-item > a {
+				color: $color_secondary;
+			}
+		}
+	}
+}
+
 .hero-banner {
 	position: relative;
 	background-color: #0D3647;
@@ -1226,12 +1313,29 @@ p:has(.button-element.button) {
 		.menu-item-has-children {
 			width: 100%;
 			position: relative;
+			flex-wrap: wrap;
+			align-items: center;
 		}
 		ul.sub-menu {
 			display: none;
+			flex: 0 0 100%;
 			list-style: none;
-			margin: 12px 0 0;
-			padding: 0 0 0 16px;
+			margin: 10px 0 0;
+			padding: 4px 0 4px 18px;
+			border-left: 2px solid $color_green;
+			li + li {
+				margin-top: 4px;
+			}
+			a {
+				font-size: 14px;
+				color: rgba(255, 255, 255, 0.85);
+				&:hover, &:focus {
+					color: $color_secondary;
+				}
+			}
+			.current-menu-item > a {
+				color: $color_secondary;
+			}
 		}
 	}
 	.submenu-toggle {
@@ -1244,6 +1348,12 @@ p:has(.button-element.button) {
 		padding: 8px;
 		margin-left: 8px;
 		cursor: pointer;
+		svg {
+			transition: transform 0.3s ease;
+		}
+		&[aria-expanded="true"] svg {
+			transform: rotate(180deg);
+		}
 	}
 	.hero-text {
 		padding: 120px 0 70px;
