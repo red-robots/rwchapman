@@ -254,6 +254,91 @@
 	}
 }
 
+/* Generic page (page.php) */
+.generic-article {
+	position: relative;
+	z-index: 20;
+	padding: clamp(50px, 6vw, 88px) 0 clamp(80px, 10vw, 140px);
+	.entry-content {
+		max-width: 840px;
+		font-size: 16px;
+		line-height: 1.6;
+		color: $color_primary;
+		> *:first-child {
+			margin-top: 0;
+		}
+		> *:last-child {
+			margin-bottom: 0;
+		}
+		p, ul, ol, table, blockquote, figure {
+			margin: 0 0 1.3em;
+		}
+		h2, h3, h4, h5, h6 {
+			color: $color_secondary;
+			margin: 1.6em 0 0.6em;
+		}
+		h2 {
+			font-size: clamp(22px, 2.4vw, 30px);
+			font-weight: 400;
+			text-transform: uppercase;
+			letter-spacing: 0.04em;
+		}
+		h3 {
+			font-size: clamp(19px, 2vw, 24px);
+			font-weight: 400;
+		}
+		h4, h5, h6 {
+			font-size: 18px;
+			font-weight: 600;
+			color: $color_primary;
+		}
+		ul, ol {
+			padding-left: 1.3em;
+			li + li {
+				margin-top: 0.4em;
+			}
+		}
+		ul li::marker {
+			color: $color_green;
+		}
+		a:not(.button) {
+			color: $color_primary;
+			text-decoration: underline;
+			&:hover, &:focus {
+				color: $color_secondary;
+			}
+		}
+		blockquote {
+			padding-left: 24px;
+			border-left: 3px solid $color_green;
+			font-size: 18px;
+			font-style: italic;
+		}
+		hr {
+			border: 0;
+			border-top: 1px solid $color_green;
+			margin: 2.5em 0;
+		}
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			th, td {
+				padding: 10px 14px;
+				border-bottom: 1px solid rgba($color_primary, 0.15);
+				text-align: left;
+			}
+			th {
+				font-family: $font_secondary;
+				font-weight: 600;
+			}
+		}
+	}
+}
+
 /* Two-Column Text with Circle Image */
 .repeatable_two_column_text_with_circle_image {
 	position: relative;
