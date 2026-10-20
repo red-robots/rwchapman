@@ -9,10 +9,11 @@ add_action('init', 'js_custom_init', 1);
 function js_custom_init() {
     $post_types = array(
       array(
-        'post_type' => 'teams',
-        'menu_name' => 'Teams',
-        'plural'    => 'Teams',
-        'single'    => 'Team',
+        'post_type' => 'team',
+        'menu_name' => 'Team',
+        'plural'    => 'Team Members',
+        'single'    => 'Team Member',
+        'menu_icon' => 'dashicons-groups',
         'supports'  => array('title','editor'),
         'menu_position'=> 5
       ),
@@ -93,11 +94,25 @@ function build_taxonomies() {
 
   $post_types = array(
     array(
-      'post_type' => array('portfolio'),
-      'menu_name' => 'Portfolio Category',
-      'plural'    => 'Portfolio Categories',
-      'single'    => 'Portfolio Category',
-      'taxonomy'  => 'portfolio-categories'
+      'post_type' => array('team'),
+      'menu_name' => 'States',
+      'plural'    => 'States',
+      'single'    => 'State',
+      'taxonomy'  => 'team-state'
+    ),
+    array(
+      'post_type' => array('team'),
+      'menu_name' => 'Sales Teams',
+      'plural'    => 'Sales Teams',
+      'single'    => 'Sales Team',
+      'taxonomy'  => 'team-group'
+    ),
+    array(
+      'post_type' => array('team'),
+      'menu_name' => 'Divisions',
+      'plural'    => 'Divisions',
+      'single'    => 'Division',
+      'taxonomy'  => 'team-division'
     ),
   );
 
@@ -182,6 +197,13 @@ function set_custom_cpt_columns($columns) {
         $columns['image'] = __( 'Featured Image', 'bellaworks' );
         $columns['date'] = __( 'Date', 'bellaworks' );
     }
+    else if($post_type=='team') {
+        unset($columns['date']);
+        $columns['title'] = __( 'Name', 'bellaworks' );
+        $columns['image'] = __( 'Photo', 'bellaworks' );
+        $columns['job_title'] = __( 'Title', 'bellaworks' );
+        $columns['date'] = __( 'Date', 'bellaworks' );
+    }
     else if($post_type=='post') {
       unset($columns['author']);
       unset($columns['categories']);
@@ -244,6 +266,25 @@ function custom_post_column( $column, $post_id ) {
             }
             $the_photo .= '</span>';
             echo $the_photo;
+            break;
+        }
+    }
+    else if($post_type=='team') {
+        switch ( $column ) {
+          case 'image' :
+            $img = get_field('photo',$post_id);
+            $img_src = ($img) ? $img['sizes']['thumbnail'] : '';
+            $the_photo = '<span class="tmphoto" style="display:inline-block;width:50px;height:50px;background:#e2e1e1;text-align:center;border:1px solid #CCC;border-radius:50%;overflow:hidden;">';
+            if($img_src) {
+              $the_photo .= '<span style="display:block;width:100%;height:100%;background:url('.$img_src.') top center no-repeat;background-size:cover;"></span>';
+            } else {
+              $the_photo .= '<i class="dashicons dashicons-admin-users" style="font-size:25px;position:relative;top:13px;left: -3px;opacity:0.3;"></i>';
+            }
+            $the_photo .= '</span>';
+            echo $the_photo;
+            break;
+          case 'job_title' :
+            echo nl2br( esc_html( get_field('job_title',$post_id) ) );
             break;
         }
     }
