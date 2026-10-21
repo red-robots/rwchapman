@@ -328,3 +328,106 @@ jQuery(document).ready(function($) {
 
 
 
+
+/* Team directory: filters and bio popup */
+jQuery(document).ready(function($) {
+
+	const directory = $('.repeatable_team_directory');
+	if( !directory.length ) {
+		return;
+	}
+
+	directory.each(function() {
+		const section = $(this);
+		const form = section.find('.team-filter');
+		const selects = form.find('select[data-filter]');
+		const status = section.find('.team-results-status');
+		const dialog = section.find('.team-bio-dialog')[0];
+		const dialogContent = section.find('.team-bio-dialog-content');
+		let lastTrigger = null;
+
+		const applyFilters = function() {
+			const active = {};
+			selects.each(function() {
+				if( this.value ) {
+					active[ $(this).data('filter') ] = this.value;
+				}
+			});
+
+			let total = 0;
+			section.find('.team-group').each(function() {
+				const group = $(this);
+				let visible = 0;
+				group.find('.team-card').each(function() {
+					const card = $(this);
+					let match = true;
+					$.each(active, function(taxonomy, slug) {
+						const slugs = (card.attr('data-' + taxonomy) || '').split(' ');
+						if( slugs.indexOf(slug) === -1 ) {
+							match = false;
+						}
+					});
+					card.prop('hidden', !match);
+					if( match ) {
+						visible++;
+					}
+				});
+				group.prop('hidden', visible === 0);
+				total += visible;
+			});
+
+			const filtering = !$.isEmptyObject(active);
+			form.find('.team-filter-reset').prop('hidden', !filtering);
+			section.find('.team-no-results').prop('hidden', total > 0);
+			status.text( filtering ? total + (total === 1 ? ' team member' : ' team members') + ' found' : '' );
+		};
+
+		selects.on('change', applyFilters);
+		form.on('submit', function(e) {
+			e.preventDefault();
+		});
+		form.on('reset', function() {
+			setTimeout(applyFilters, 0);
+		});
+		section.on('click', '.team-filter-clear', function() {
+			form[0].reset();
+			selects.first().trigger('focus');
+		});
+
+		if( !dialog || typeof dialog.showModal !== 'function' ) {
+			return;
+		}
+
+		const closeDialog = function() {
+			dialog.close();
+		};
+
+		section.on('click', '.team-card-button', function() {
+			const template = document.getElementById( $(this).data('bio') );
+			if( !template ) {
+				return;
+			}
+			lastTrigger = this;
+			dialogContent.empty().append( template.content.cloneNode(true) );
+			dialog.showModal();
+			dialog.scrollTop = 0;
+			$('body').addClass('team-bio-open');
+		});
+
+		$(dialog).on('click', '.team-bio-close', closeDialog);
+		// Clicking the backdrop (outside the panel) closes the bio.
+		$(dialog).on('click', function(e) {
+			if( e.target === dialog ) {
+				closeDialog();
+			}
+		});
+		$(dialog).on('close', function() {
+			$('body').removeClass('team-bio-open');
+			dialogContent.empty();
+			if( lastTrigger ) {
+				lastTrigger.focus();
+			}
+		});
+	});
+
+});

@@ -407,3 +407,98 @@ function bellaworks_news_archive_query($query) {
   }
 }
 add_action('pre_get_posts', 'bellaworks_news_archive_query');
+
+
+/*-------------------------------------
+  Team
+---------------------------------------*/
+// Sales Teams in Display Order, each with its published members.
+function bellaworks_team_groups() {
+  $terms = get_terms(array(
+    'taxonomy'   => 'team-group',
+    'hide_empty' => true,
+  ));
+  if( is_wp_error($terms) || !$terms ) {
+    return array();
+  }
+  usort($terms, function($a, $b) {
+    $a_order = (int) get_field('display_order', $a);
+    $b_order = (int) get_field('display_order', $b);
+    return ($a_order === $b_order) ? strcmp($a->name, $b->name) : $a_order - $b_order;
+  });
+
+  $groups = array();
+  foreach($terms as $term) {
+    $members = get_posts(array(
+      'post_type'      => 'team',
+      'post_status'    => 'publish',
+      'posts_per_page' => -1,
+      'orderby'        => array('menu_order' => 'ASC', 'date' => 'ASC'),
+      'tax_query'      => array(array(
+        'taxonomy' => 'team-group',
+        'terms'    => $term->term_id,
+      )),
+    ));
+    if( $members ) {
+      $groups[] = array('term' => $term, 'members' => $members);
+    }
+  }
+  return $groups;
+}
+
+// Space-separated term slugs, used as filter data attributes on team cards.
+function bellaworks_team_term_slugs($post_id, $taxonomy) {
+  $slugs = wp_get_post_terms($post_id, $taxonomy, array('fields' => 'slugs'));
+  return ( is_wp_error($slugs) ) ? '' : implode(' ', $slugs);
+}
+
+function bellaworks_team_vcard_url($post_id) {
+  return add_query_arg('team_vcard', $post_id, home_url('/'));
+}
+
+// ?team_vcard={id} downloads a .vcf for a published team member.
+function bellaworks_team_vcard() {
+  if( !isset($_GET['team_vcard']) ) {
+    return;
+  }
+  $member = get_post( absint($_GET['team_vcard']) );
+  if( !$member || $member->post_type !== 'team' || $member->post_status !== 'publish' ) {
+    return;
+  }
+
+  $escape = function($value) {
+    $value = wp_strip_all_tags( html_entity_decode($value, ENT_QUOTES, 'UTF-8') );
+    return str_replace(array('\\', ',', ';', "\r\n", "\n"), array('\\\\', '\,', '\;', '\n', '\n'), trim($value));
+  };
+  $name = get_the_title($member);
+  $name_parts = preg_split('/\s+/', trim( preg_replace('/\(.*?\)/', '', $name) ));
+  $last_name = ( count($name_parts) > 1 ) ? array_pop($name_parts) : '';
+  $first_name = implode(' ', $name_parts);
+  $job_title = preg_replace('/\s*\n\s*/', ' ', (string) get_field('job_title', $member->ID, false));
+  $email = get_field('email', $member->ID);
+  $phone = get_field('phone', $member->ID);
+  $mobile = get_field('mobile_phone', $member->ID);
+  $photo = get_field('photo', $member->ID);
+
+  $lines = array(
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'N:' . $escape($last_name) . ';' . $escape($first_name) . ';;;',
+    'FN:' . $escape($name),
+    'ORG:' . $escape('Robert W. Chapman & Co.'),
+  );
+  if( $job_title ) $lines[] = 'TITLE:' . $escape($job_title);
+  if( $email ) $lines[] = 'EMAIL;TYPE=INTERNET,WORK:' . $escape($email);
+  if( $phone ) $lines[] = 'TEL;TYPE=WORK,VOICE:' . $escape($phone);
+  if( $mobile ) $lines[] = 'TEL;TYPE=CELL,VOICE:' . $escape($mobile);
+  if( $photo ) $lines[] = 'PHOTO;VALUE=URI:' . esc_url_raw($photo['sizes']['medium']);
+  $lines[] = 'URL:' . esc_url_raw( home_url('/') );
+  $lines[] = 'END:VCARD';
+
+  nocache_headers();
+  header('Content-Type: text/vcard; charset=utf-8');
+  header('Content-Disposition: attachment; filename="' . sanitize_file_name($member->post_name) . '.vcf"');
+  echo implode("\r\n", $lines) . "\r\n";
+  exit;
+}
+add_action('template_redirect', 'bellaworks_team_vcard');

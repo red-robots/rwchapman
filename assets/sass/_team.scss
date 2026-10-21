@@ -1,0 +1,497 @@
+/* ==========================================================================
+   Team & Territory (team_intro, team_directory, bio popup)
+   ========================================================================== */
+
+/* Cream box with the offset green outline (matches the callout box) */
+@mixin creamOutlineBox($offset: 10px) {
+	position: relative;
+	z-index: 1;
+	background: $color_cream;
+	&:after {
+		content: "";
+		position: absolute;
+		top: -$offset;
+		left: $offset;
+		width: 100%;
+		height: 100%;
+		border: 2px solid $color_green;
+		pointer-events: none;
+		z-index: -1;
+	}
+}
+
+/* Intro with territory map */
+.repeatable_team_intro {
+	position: relative;
+	z-index: 20;
+	overflow: hidden;
+	color: #FFF;
+	background-color: $color_primary;
+	padding: clamp(60px, 7.5vw, 108px) 0 clamp(100px, 10vw, 140px);
+	.territory-map {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 62%;
+		pointer-events: none;
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 18%;
+			background: linear-gradient(to right, rgba($color_primary, 0) 0%, $color_primary 100%);
+		}
+	}
+	.wrapper {
+		position: relative;
+		z-index: 2;
+	}
+	.content-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 370px);
+		align-items: center;
+		column-gap: clamp(30px, 5vw, 80px);
+		row-gap: 40px;
+		min-height: 370px;
+	}
+	.section-title {
+		color: #FFF;
+		font-weight: 600;
+		line-height: 1.18;
+		letter-spacing: 0.02em;
+	}
+	.section-text {
+		font-size: 18px;
+		line-height: 1.39;
+		p {
+			margin: 0 0;
+			+ p {
+				margin-top: 1.4em;
+			}
+		}
+		a {
+			color: #FFF;
+		}
+	}
+	@include max($tabwidth) {
+		.territory-map {
+			width: 100%;
+			opacity: 0.45;
+			&:after {
+				display: none;
+			}
+		}
+		.content-inner {
+			grid-template-columns: minmax(0, 1fr);
+			min-height: 0;
+		}
+		.section-text {
+			max-width: 560px;
+			font-size: 17px;
+		}
+	}
+}
+
+/* Directory */
+.repeatable_team_directory {
+	position: relative;
+	z-index: 25;
+	padding-bottom: clamp(70px, 9vw, 130px);
+	[hidden] {
+		display: none !important;
+	}
+	.team-filter {
+		@include creamOutlineBox();
+		max-width: 1125px;
+		margin: -35px auto 0;
+		padding: 34px clamp(20px, 6vw, 92px) 55px;
+		text-align: center;
+	}
+	.team-filter-title {
+		margin: 0 0 24px;
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 1.3;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: $color_primary;
+	}
+	.team-filter-fields {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 275px));
+		justify-content: space-between;
+		gap: 20px clamp(20px, 4vw, 58px);
+	}
+	.team-filter-field {
+		position: relative;
+		&:after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: 14px;
+			width: 28px;
+			height: 28px;
+			margin-top: -14px;
+			border-radius: 50%;
+			background: $color_secondary url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5F5F5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M12 4v16M5 13l7 7 7-7'/%3e%3c/svg%3e") center / 15px no-repeat;
+			pointer-events: none;
+			transition: background-color 0.2s ease;
+		}
+		&:hover:after,
+		&:focus-within:after {
+			background-color: $color_primary;
+		}
+	}
+	select {
+		appearance: none;
+		-webkit-appearance: none;
+		display: block;
+		width: 100%;
+		height: 51px;
+		padding: 0 56px 0 25px;
+		border: 1px solid #FFF;
+		border-radius: 0;
+		background: #FFF;
+		font-family: $font_secondary;
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: $color_primary;
+		cursor: pointer;
+		&:focus-visible {
+			outline: 2px solid $color_secondary;
+			outline-offset: 2px;
+		}
+	}
+	.team-filter-reset,
+	.team-filter-clear {
+		appearance: none;
+		margin: 22px 0 0;
+		padding: 0;
+		border: 0;
+		background: none;
+		font-family: $font_secondary;
+		font-size: 13px;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: $color_primary;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		cursor: pointer;
+		&:hover {
+			color: $color_secondary;
+		}
+	}
+	.team-filter-clear {
+		margin: 0 0 0 6px;
+		font-size: inherit;
+		letter-spacing: 0;
+		text-transform: none;
+		font-family: inherit;
+	}
+	.team-group {
+		padding-top: clamp(60px, 7vw, 95px);
+		.section-title {
+			font-weight: 600;
+			letter-spacing: 0.02em;
+			text-align: center;
+			margin-bottom: clamp(30px, 4vw, 50px);
+		}
+	}
+	.team-no-results {
+		padding-top: clamp(50px, 6vw, 80px);
+		text-align: center;
+		font-size: 18px;
+		color: $color_primary;
+	}
+	@include max($tabwidth) {
+		.team-filter-fields {
+			grid-template-columns: minmax(0, 1fr);
+			max-width: 400px;
+			margin: 0 auto;
+		}
+	}
+}
+
+.team-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 259px));
+	justify-content: center;
+	gap: 50px 31px;
+	margin: 0 0;
+	padding: 0 0;
+	list-style: none;
+	@include max($midwidth) {
+		grid-template-columns: repeat(3, minmax(0, 259px));
+	}
+	@include max($xswidth) {
+		grid-template-columns: repeat(2, minmax(0, 259px));
+		gap: 40px 20px;
+	}
+}
+
+.team-card-button {
+	appearance: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 0;
+	border: 0;
+	background: none;
+	text-align: center;
+	color: $color_primary;
+	cursor: pointer;
+	.team-photo {
+		margin: 0 0;
+		img {
+			transition: transform 0.4s ease;
+		}
+	}
+	&:after {
+		content: "";
+		order: 1;
+		width: 77px;
+		height: 2px;
+		margin: 15px 0 14px;
+		background: $color_green;
+	}
+	.team-name {
+		order: 2;
+		font-family: $font_secondary;
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1.2;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		color: $color_secondary;
+		transition: color 0.2s ease;
+	}
+	.team-title {
+		order: 3;
+		margin-top: 4px;
+		font-size: 15px;
+		line-height: 1.4;
+	}
+	&:hover,
+	&:focus-visible {
+		.team-photo img {
+			transform: scale(1.05);
+		}
+		.team-name {
+			color: $color_primary;
+		}
+	}
+	&:focus-visible {
+		outline: 2px solid $color_secondary;
+		outline-offset: 6px;
+	}
+	@include max($xswidth) {
+		.team-name {
+			font-size: 16px;
+		}
+		.team-title {
+			font-size: 14px;
+		}
+	}
+}
+
+/* Oval photo with the blue fade at the bottom */
+.team-photo {
+	position: relative;
+	width: 100%;
+	margin: 0 0;
+	aspect-ratio: 259 / 296;
+	border-radius: 50%;
+	overflow: hidden;
+	background: $color_primary;
+	transform: translateZ(0);
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center top;
+	}
+	&:after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, rgba($color_secondary, 0) 50%, rgba($color_secondary, 0.9) 100%);
+		pointer-events: none;
+	}
+}
+.team-photo-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	font-family: $font_secondary;
+	font-size: clamp(36px, 5vw, 60px);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	color: rgba(#FFF, 0.7);
+}
+
+/* Bio popup */
+body.team-bio-open {
+	overflow: hidden;
+}
+.team-bio-dialog {
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	max-height: none;
+	margin: 0 0;
+	padding: clamp(30px, 6vw, 80px) clamp(16px, 4vw, 64px);
+	border: 0;
+	background: transparent;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	&::backdrop {
+		background: rgba($color_primary, 0.85);
+	}
+	&[open] .team-bio-dialog-inner {
+		animation: teamBioIn 0.25s ease both;
+	}
+}
+@keyframes teamBioIn {
+	from { opacity: 0; transform: translateY(16px); }
+	to { opacity: 1; transform: none; }
+}
+.team-bio-dialog-inner {
+	@include creamOutlineBox();
+	max-width: 1125px;
+	margin: 10px auto 0;
+	padding: clamp(60px, 6.5vw, 95px) clamp(24px, 8vw, 115px) clamp(50px, 6vw, 80px) clamp(24px, 7vw, 97px);
+	color: $color_primary;
+}
+.team-bio-close {
+	position: absolute;
+	top: 18px;
+	right: 22px;
+	z-index: 2;
+	width: 44px;
+	height: 44px;
+	padding: 0 0;
+	border: 0;
+	background: none;
+	font-family: $font_secondary;
+	font-size: 44px;
+	font-weight: 400;
+	line-height: 44px;
+	color: $color_primary;
+	cursor: pointer;
+	&:hover {
+		color: $color_secondary;
+	}
+	&:focus-visible {
+		outline: 2px solid $color_secondary;
+	}
+}
+.team-bio {
+	display: grid;
+	grid-template-columns: minmax(0, 367px) minmax(0, 1fr);
+	column-gap: clamp(30px, 4vw, 44px);
+	row-gap: 40px;
+	align-items: start;
+	.team-photo {
+		aspect-ratio: 367 / 419;
+	}
+	.team-bio-name {
+		margin: 0 0;
+		font-size: clamp(32px, 4.5vw, 55px);
+		font-weight: 600;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		color: $color_secondary;
+	}
+	.team-bio-title {
+		margin: 6px 0 0;
+		font-family: $font_secondary;
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 1.3;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+	.team-bio-text {
+		margin-top: 32px;
+		font-size: 16px;
+		line-height: 1.32;
+		p {
+			margin: 0 0;
+			+ p {
+				margin-top: 1.3em;
+			}
+		}
+		a {
+			color: $color_primary;
+		}
+	}
+	.team-bio-details {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: repeat(3, auto);
+		justify-content: space-between;
+		gap: 30px;
+		margin: 0 0 0 clamp(0px, 2.4vw, 26px);
+		padding-top: 45px;
+		border-top: 2px solid $color_green;
+	}
+	.team-bio-detail {
+		h3 {
+			margin: 0 0 6px;
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 1.2;
+			letter-spacing: 0.02em;
+			text-transform: uppercase;
+			color: $color_primary;
+		}
+		p {
+			margin: 0 0 8px;
+			font-size: 16px;
+			line-height: 1.4;
+		}
+		a {
+			color: $color_primary;
+		}
+		.phone-label {
+			font-size: 14px;
+			opacity: 0.75;
+		}
+	}
+	.team-vcard {
+		text-decoration: none;
+		&:hover {
+			color: $color_secondary;
+			text-decoration: underline;
+			text-underline-offset: 4px;
+		}
+	}
+	@include max($tabwidth) {
+		grid-template-columns: minmax(0, 1fr);
+		.team-bio-photo {
+			max-width: 260px;
+		}
+		.team-bio-details {
+			grid-template-columns: minmax(0, 1fr);
+			margin-left: 0;
+			padding-top: 30px;
+			gap: 24px;
+		}
+	}
+}

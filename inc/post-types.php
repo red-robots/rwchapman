@@ -284,7 +284,7 @@ function custom_post_column( $column, $post_id ) {
             echo $the_photo;
             break;
           case 'job_title' :
-            echo nl2br( esc_html( get_field('job_title',$post_id) ) );
+            echo nl2br( esc_html( get_field('job_title',$post_id,false) ) );
             break;
         }
     }
