@@ -33,7 +33,8 @@
 		top: 0;
 		left: 0;
 		bottom: 0;
-		width: 62%;
+		/* The map is anchored to its right edge, so widening this shifts the highlighted states right, clear of the title */
+		width: 70%;
 		pointer-events: none;
 		img {
 			display: block;
