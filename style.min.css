@@ -1374,6 +1374,10 @@ p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:fl
 .repeatable_callout_box .callout-box-inner .text-wrapper{background:#e0e1d5;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:2rem;padding:30px 30px;min-height:180px;position:relative;z-index:2}
 .repeatable_callout_box .callout-box-inner .text-wrapper:after{content:"";display:block;width:100%;height:100%;position:absolute;top:-12px;left:12px;pointer-events:none;z-index:-1;border:2px solid #52884e}
 .repeatable_callout_box .callout-box-inner .section-title{font-size:30px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:#0d3647;margin:0}
+.repeatable_callout_box .callout-box-inner .text-wrapper:has(.callout-text){-ms-flex-wrap:wrap;flex-wrap:wrap;row-gap:1.25rem}
+.repeatable_callout_box .callout-box-inner .callout-text{width:100%;max-width:760px;text-align:center}
+.repeatable_callout_box .callout-box-inner .callout-text p{margin:0 0 1em}
+.repeatable_callout_box .callout-box-inner .callout-text p:last-child{margin-bottom:0}
 .repeatable_callout_box .background-image-overlay{position:absolute;bottom:0;left:0;width:100%;height:80%;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none}
 .repeatable_callout_box .background-image-overlay:before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:#5a88c4;opacity:.8}
 .site-footer{position:relative;padding:clamp(48px,5vw,70px) 0 clamp(72px,8vw,120px);background:#0d3647;color:#fff;text-align:center}

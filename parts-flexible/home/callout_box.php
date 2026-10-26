@@ -4,6 +4,7 @@
   $btnUrl = isset($button['url']) ? $button['url'] : '';
   $btnTitle = isset($button['title']) ? $button['title'] : '';
   $btnTarget = isset($button['target']) ? $button['target'] : '_self';
+  $text = get_sub_field('text');
   $section_background_image = get_sub_field('section_background_image');
   $section_background_image_url = isset($section_background_image['url']) ? $section_background_image['url'] : '';
   $section_background_image_alt = isset($section_background_image['alt']) ? $section_background_image['alt'] : '';
@@ -18,6 +19,9 @@
             <?php } ?>
             <?php if($btnUrl && $btnTitle) { ?>
               <a href="<?php echo $btnUrl ?>" target="<?php echo $btnTarget ?>" class="button"><?php echo $btnTitle ?></a>
+            <?php } ?>
+            <?php if($text) { ?>
+              <div class="callout-text"><?php echo $text ?></div>
             <?php } ?>
           </div>
         </div>

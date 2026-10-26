@@ -1133,6 +1133,21 @@ p:has(.button-element.button) {
 			color: $color_primary;
 			margin: 0 0;
 		}
+		.text-wrapper:has(.callout-text) {
+			flex-wrap: wrap;
+			row-gap: 1.25rem;
+		}
+		.callout-text {
+			width: 100%;
+			max-width: 760px;
+			text-align: center;
+			p {
+				margin: 0 0 1em;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
 	}
 	.background-image-overlay {
 		position: absolute;
