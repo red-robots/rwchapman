@@ -1430,6 +1430,14 @@ p:has(.button-element.button){display:-webkit-box;display:-ms-flexbox;display:fl
 .repeatable_title_band{position:relative;z-index:20;color:#fff;background-color:#5a88c4;padding:clamp(150px,14.5vw,208px) 0 clamp(40px,4vw,55px)}
 .repeatable_title_band .section-title{color:#fff;font-weight:300}
 .repeatable_title_band .section-title strong{font-weight:600}
+.repeatable_member_logo{position:relative;z-index:30;padding-top:clamp(40px,5vw,70px)}
+.repeatable_member_logo .content-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:clamp(20px,3vw,40px);max-width:840px}
+.repeatable_member_logo .member-logo{-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;margin:0}
+.repeatable_member_logo .member-logo img{display:block;width:auto;height:auto;max-width:clamp(120px,14vw,200px);max-height:100px}
+.repeatable_member_logo .member-text{font-size:18px;line-height:1.5;color:#0d3647}
+.repeatable_member_logo .member-text p{margin:0}
+.repeatable_member_logo .member-text p+p{margin-top:.8em}
+.repeatable_member_logo .member-text a{color:#0d3647}
 .generic-article{position:relative;z-index:20;padding:clamp(50px,6vw,88px) 0 clamp(80px,10vw,140px)}
 .generic-article .entry-content{max-width:840px;font-size:16px;line-height:1.6;color:#0d3647}
 .generic-article .entry-content>*:first-child{margin-top:0}
@@ -1657,6 +1665,7 @@ body.team-bio-open{overflow:hidden}
 }@media screen and (max-width:1200px){.repeatable_intro_with_circle_image .text-columns{max-width:60%;-ms-flex-wrap:wrap;flex-wrap:wrap}
 .repeatable_intro_with_circle_image .buttons{width:100%;min-width:0}
 .repeatable_intro_with_circle_image .buttons .button{min-width:0;width:100%;max-width:370px;white-space:normal}
+.repeatable_member_logo .content-inner{max-width:62%}
 .repeatable_two_column_text_with_circle_image .text-columns{max-width:62%}
 }@media screen and (max-width:1080px){.repeatable_partners_logo .partner-logos-inner{padding:40px 50px}
 .repeatable_partners_logo .partner-logos-inner figure img{height:48px}
@@ -1706,6 +1715,7 @@ body.team-bio-open{overflow:hidden}
 .repeatable_intro_with_circle_image .buttons .button{max-width:none}
 .repeatable_intro_with_circle_image .circle-image{position:relative;top:auto;right:auto;width:min(70vw,420px);height:min(70vw,420px);margin:0 auto}
 .repeatable_title_band{padding-bottom:clamp(40px,8vw,70px)}
+.repeatable_member_logo .content-inner{max-width:none}
 .repeatable_two_column_text_with_circle_image{padding-bottom:0}
 .repeatable_two_column_text_with_circle_image .text-columns{max-width:none}
 .repeatable_two_column_text_with_circle_image .circle-image{position:relative;top:auto;right:auto;width:min(70vw,420px);height:min(78vw,470px);margin:40px auto 0}
@@ -1749,6 +1759,7 @@ h6{font-size:clamp(12px,1.5vw,15px)}
 .site-footer .footer-column+.footer-column{border-left:0;border-top:1px solid #52884e}
 .site-footer .footer-column.footer-column-address{padding-bottom:60px}
 .repeatable_arrow_list .arrow-list{-webkit-columns:1;-moz-columns:1;columns:1}
+.repeatable_member_logo .content-inner{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}
 .repeatable_two_column_text_with_circle_image .text-columns{grid-template-columns:minmax(0,1fr)}
 .repeatable_title_left_text_right .content-inner{grid-template-columns:minmax(0,1fr)}
 .team-grid{grid-template-columns:repeat(2,minmax(0,259px));gap:40px 20px}
