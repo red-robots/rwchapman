@@ -1137,6 +1137,13 @@ p:has(.button-element.button) {
 			flex-wrap: wrap;
 			row-gap: 1.25rem;
 		}
+		/* Title, then text, then button, each on its own centred line */
+		.text-wrapper.stacked {
+			flex-direction: column;
+			flex-wrap: nowrap;
+			row-gap: 1.25rem;
+			text-align: center;
+		}
 		.callout-text {
 			width: 100%;
 			max-width: 760px;

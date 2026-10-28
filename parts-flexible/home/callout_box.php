@@ -13,15 +13,15 @@
     <div data-group="<?php echo get_row_layout() ?>" id="repeatable_<?php echo get_row_layout() ?>_<?php echo $i ?>" class="repeatable repeatable_<?php echo get_row_layout() ?>">
       <div class="callout-box-inner">
         <div class="wrapper">
-          <div class="text-wrapper">
+          <div class="text-wrapper stacked">
             <?php if($title) { ?>
               <h2 class="section-title"><?php echo $title ?></h2>
             <?php } ?>
-            <?php if($btnUrl && $btnTitle) { ?>
-              <a href="<?php echo $btnUrl ?>" target="<?php echo $btnTarget ?>" class="button"><?php echo $btnTitle ?></a>
-            <?php } ?>
             <?php if($text) { ?>
               <div class="callout-text"><?php echo $text ?></div>
+            <?php } ?>
+            <?php if($btnUrl && $btnTitle) { ?>
+              <a href="<?php echo $btnUrl ?>" target="<?php echo $btnTarget ?>" class="button"><?php echo $btnTitle ?></a>
             <?php } ?>
           </div>
         </div>

@@ -2,6 +2,7 @@
 $is_home_page = ( is_front_page() || is_home() ) ? true : false;
 $partsFiles = get_flexible_parts($is_home_page);
 $flexible_field_name = ($is_home_page) ? 'home_flexible_content' : 'subpage_flexible_content';
+$flexible_rows = get_field($flexible_field_name); // lets a block look at its neighbours ($i is 1-based)
 
 if( have_rows($flexible_field_name) ) {
   $i=1; while( have_rows($flexible_field_name) ): the_row();
