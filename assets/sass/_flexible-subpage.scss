@@ -32,14 +32,16 @@
 		}
 	}
 	.text-columns {
-		max-width: 830px;
+		// Keep the text clear of the circle image on the right (it shows ~25vw).
+		max-width: min(830px, calc(61vw - 40px));
 		display: flex;
+		flex-wrap: wrap;
 		align-items: flex-start;
 		gap: clamp(30px, 4vw, 60px);
 		margin-top: clamp(30px, 4vw, 50px);
 	}
 	.section-text {
-		flex: 1 1 420px;
+		flex: 1 1 380px;
 		max-width: 420px;
 		font-size: 16px;
 		line-height: 1.5;
@@ -406,7 +408,8 @@
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		column-gap: clamp(30px, 4.5vw, 64px);
 		row-gap: 30px;
-		max-width: 840px;
+		// Keep the text clear of the circle image on the right (it shows ~27vw).
+		max-width: min(840px, calc(59vw - 40px));
 		align-items: start;
 	}
 	.column {
@@ -445,11 +448,6 @@
 			height: 100%;
 			object-fit: cover;
 			object-position: center;
-		}
-	}
-	@include max($deskwidth) {
-		.text-columns {
-			max-width: 62%;
 		}
 	}
 	@include max($tabwidth) {
